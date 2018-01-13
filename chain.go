@@ -1,22 +1,22 @@
 package main
 
 type Chain struct {
-	blockChain []*Block
+	blockChain []Block
 }
 
-func NewChain() *Chain {
+func NewChain() Chain {
 	chain := new(Chain)
-	chain.blockChain = make([]*Block, 1)
+	chain.blockChain = make([]Block, 1)
 	chain.blockChain[0] = createGenesisBlock()
 
-	return chain
+	return *chain
 }
 
-func (chain *Chain) GetLatestBlock() *Block {
+func (chain *Chain) GetLatestBlock() Block {
 	return chain.blockChain[len(chain.blockChain)-1]
 }
 
-func (chain *Chain) AddBlock(block *Block) {
+func (chain *Chain) AddBlock(block Block) {
 	chain.blockChain = append(chain.blockChain, block)
 }
 
@@ -42,6 +42,6 @@ func (chain *Chain) IsChainValid() bool {
 	return true
 }
 
-func createGenesisBlock() *Block {
+func createGenesisBlock() Block {
 	return NewBlock(0, 123, "{mydata: ok}", 0)
 }

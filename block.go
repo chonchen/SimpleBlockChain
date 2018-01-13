@@ -8,7 +8,7 @@ type Block struct {
 	ThisHash     int
 }
 
-func NewBlock(index int, timestamp int, data string, previousHash int) *Block {
+func NewBlock(index int, timestamp int, data string, previousHash int) Block {
 	block := new(Block)
 	block.Index = index
 	block.Timestamp = timestamp
@@ -16,9 +16,9 @@ func NewBlock(index int, timestamp int, data string, previousHash int) *Block {
 	block.PreviousHash = previousHash
 	block.ThisHash = block.CalculateHash()
 
-	return block
+	return *block
 }
 
-func (block *Block) CalculateHash() int {
+func (block Block) CalculateHash() int {
 	return block.Index + block.PreviousHash + block.Timestamp + len(block.Data)
 }
